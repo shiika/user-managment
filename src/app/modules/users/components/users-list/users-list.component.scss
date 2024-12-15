@@ -1,0 +1,13 @@
+@import "../../../../../assets/Scss/mixins";
+@import "../../../../../assets//Scss/variables";
+
+.users {
+    padding: 4rem 0;
+
+    &__header {
+
+        h1 {
+            @include primary-heading;
+        }
+    }
+}

@@ -1,0 +1,46 @@
+<section class="users">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 users__header d-flex justify-content-center my-5">
+          <h1 class="font-weight-bold">Users</h1>
+        </div>
+        <div class="col-12 d-flex flex-column">
+          <ng-container *ngIf="isAdmin()">
+            <button type="button" class="btn btn-primary mb-2 ml-auto" [routerLink]="['/users/create']">Create User</button>
+          </ng-container>
+          <table class="table table-responsive-md">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Status</th>
+                <th scope="col" *ngIf="isAdmin()"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <th scope="row">{{ user.id }}</th>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phone }}</td>
+                <td>{{ user.status }}</td>
+                <td *ngIf="isAdmin()">
+                  <button type="button" class="btn btn-outline-primary mb-2 ml-auto" [routerLink]="['/users/edit', user.id]" routerLinkActive="router-link-active" >Edit</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <nav aria-label="Page navigation" *ngIf="TOTAL_COUNT > pageSize">
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link"  *ngIf="currentPage > 0">Previous</a></li>
+              <li *ngFor="let i of pageNumbers" class="page-item" (click)="loadUsers(i - 1)"><a class="page-link" >{{ i }}</a></li>
+              <li class="page-item" (click)="loadUsers(this.currentPage + 1)"><a class="page-link"  *ngIf="currentPage < pageNumbers.length">Next</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+  
